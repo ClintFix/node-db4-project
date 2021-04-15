@@ -19,6 +19,35 @@ async function getRecipeById(id) {
         )
         .where("r.recipe_id", id)
         .orderBy("s.step_number", "asc")
+
+        const recipeObj = {};
+        recipeRows.forEach(row => {
+            if (!recipeObj.recipe_id || !recipeObj.recipe_name || !recipeObj.created_at) {
+                recipeObj.recipe_id = row.recipe_id;
+                recipeObj.recipe_name = row.recipe_name;
+                recipeObj.created_at = row.created_at;
+                recipeObj.steps = []
+            }
+            if (row.step_id) {
+                recipeObj.steps.push({
+                    "step_id": row.step_id,
+                    "step_number": row.step_number,
+                    "step_instructions": row.step_instructions,
+                    "ingredients": [],
+                })
+            }
+            if (row.ingredient_id) {
+                recipeObj.steps[row.step_number - 1].ingredients.push({
+                    "ingredient_id": row.ingredient_id,
+                    "ingredient_name": row.ingredient_name,
+                    "quantity": row.quantity,
+                    "quantity_unit": row.quantity_unit
+                })
+            }
+
+        })
+
+        return recipeObj;
 };
 
 module.exports = {
