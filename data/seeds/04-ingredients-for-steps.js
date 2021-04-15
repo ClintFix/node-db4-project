@@ -8,7 +8,8 @@ exports.seed = function(knex, Promise) {
       { step_id: 6, ingredient_id: 5, quantity: 3, quantity_unit: "cups"},
       { step_id: 7, ingredient_id: 6, quantity: .5, quantity_unit: "liters"},
       { step_id: 8, ingredient_id: 7, quantity: 2, quantity_unit: "slices"},
-      { step_id: 8, ingredient_id: 8, quantity: 2, quantity_unit: "tbsp"}
+      { step_id: 8, ingredient_id: 8, quantity: 2, quantity_unit: "tbsp"},
+      { step_id: 9, ingredient_id: 3, quantity: 1, quantity_unit: "slice"}
     ]);
   };
   
