@@ -28,7 +28,7 @@ async function getRecipeById(id) {
                 recipeObj.created_at = row.created_at;
                 recipeObj.steps = []
             }
-            if (row.step_id) {
+            if (!recipeObj.steps[row.step_number - 1] && row.step_id) {
                 recipeObj.steps.push({
                     "step_id": row.step_id,
                     "step_number": row.step_number,
