@@ -3,8 +3,8 @@ exports.up = function(knex) {
     return knex.schema
         .createTable("recipes", tbl => {
             tbl.increments("recipe_id")
-            tbl.timestamp("created_at", { precision: 6 }).defaultTo(knex.fn.now(6))
             tbl.string("recipe_name", 128).notNullable().unique()
+            tbl.timestamp('created_at').defaultTo(knex.fn.now());
         })
         .createTable("ingredients", tbl => {
             tbl.increments("ingredient_id")
@@ -28,7 +28,7 @@ exports.up = function(knex) {
             tbl.integer("step_id")
                 .unsigned()
                 .notNullable()
-                .referenceS("step_id")
+                .references("step_id")
                 .inTable("steps")
                 .onDelete("RESTRICT")
             tbl.integer("ingredient_id")
